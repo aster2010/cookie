@@ -1,0 +1,85 @@
+<html>
+    <p id="perseconde">Je hebt: 0 koekjes per seconde!</p>
+    <script>
+        var koekje =  document.getElementById('koekje')
+        var vijftig = "nee"
+        function update() {
+            document.getElementById('perseconde').innerHTML = "je hebt: "+ autoclick + " koekjes per seconde"
+            document.getElementById('text').value = cookiecount
+            document.title = cookiecount + " cookies"
+            document.getElementById('koste').innerHTML = "je hebt: " + autoclick + " auto klikkers"
+            document.getElementById('autoklikkoste').innerHTML = "Je hebt: " + ((autoclick+1) * 12) + " koekjes nodig voor de volgende auto klikker!"
+        }
+        var cookiecount = 0
+        var autoclick = 0
+        function timer() {
+            cookiecount = cookiecount + autoclick
+            
+        }
+        setInterval(timer, 1000)
+        setInterval(update, 1000)
+    </script>
+    <head><title>0 cookies</title></head>
+    <body>
+        <a href=# id='koekje' onclick="add()" ><img src="koekje.jpg"></a>
+        <a><img src="muis.png"></a>
+        <br><br>
+        klik op het koekje!!
+        <br><br>
+        Je hebt
+        <input type="text" id="text" disabled style = text-align:center>
+    </body>
+    <script>
+        document.getElementById('text').value = cookiecount
+        function add() {
+            cookiecount = cookiecount + 1
+            if (cookiecount == 50) {
+                if (vijftig == "nee") {
+                    alert("goed bezig!")
+                    img.style.visibility = "visible" 
+                    vijftig = "ja"
+                }
+            }
+            update()
+        }
+    </script>
+    Koekjes
+    <br><br>
+    <button><a href="#" onclick="herstart()">klik hier om te herstarten herstart</a></button>
+    <script>
+        function herstart() {
+            location.reload()
+        }
+    </script>
+    <button><a href="#" onclick="opslaan()">opslaan</a></button>
+    <button><a href="#" onclick="laden()">laden</a></button>
+    <p>koop 1 koekje per seconde erbij</p>
+    <button><a href="#" onclick="koopauto()">HIER</a></button>
+    <p id="koste">Je hebt: 0 auto klikkers</p>
+    <p id= "autoklikkoste">Je hebt: 12 koekjes nodig voor de volgende auto klikker!</p>
+    <script>
+        function opslaan() {
+            localStorage.setItem("cookiecount", cookiecount)
+            localStorage.setItem("autoclick", autoclick)
+        }
+        function laden() {
+            autoclick = localStorage.getItem("autoclick")
+            cookiecount = localStorage.getItem("cookiecount")
+            cookiecount = parseInt(cookiecount)
+            autoclick = parseInt(autoclick)
+            update()
+        }
+        function koopauto() {
+            if (cookiecount >= ((autoclick+1) * 12)) {
+                cookiecount = cookiecount - ((autoclick+1) * 12)
+                autoclick = autoclick + 1
+                update()
+            }
+        } 
+    </script>
+    <a id="duim"><img src="duim.webp"></a>
+    <script>
+        var img = document.getElementById('duim')
+        img.style.visibility = "hidden"
+    </script>
+</html>
